@@ -1,5 +1,6 @@
 package com.safframework.rxcache.memory.impl;
 
+import com.safframework.rxcache.domain.MemoryCacheStatistics;
 import com.safframework.rxcache.memory.Memory;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public abstract class AbstractMemoryImpl implements Memory {
     protected List<String> keys;
     protected long maxSize;
     protected Lock lock = new ReentrantLock();
+    protected MemoryCacheStatistics cacheStatistics = null;
 
     public AbstractMemoryImpl(long maxSize) {
 
@@ -25,5 +27,6 @@ public abstract class AbstractMemoryImpl implements Memory {
         this.expireTimeMap = new HashMap<>();
         this.maxSize = maxSize;
         this.keys = new LinkedList<>();
+        this.cacheStatistics = new MemoryCacheStatistics((int)maxSize);
     }
 }
